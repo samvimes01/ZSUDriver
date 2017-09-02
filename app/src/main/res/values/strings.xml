@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ZSU Driver</string>
+    <string name="add_button_label">add date</string>
+    <string name="send_button_label">send date</string>
+    <string name="date">date</string>
+    <string name="number">number</string>
+    <string name="km_before">km before</string>
+    <string name="km_after">km after</string>
+    <string name="km_day">km day</string>
+    <string name="fuel_before">fuel before</string>
+    <string name="fuel_after">fuel after</string>
+    <string name="fuel_add">fuel add</string>
+</resources>
