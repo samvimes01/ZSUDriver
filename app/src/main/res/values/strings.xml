@@ -1,13 +1,19 @@
 <resources>
     <string name="app_name">ZSU Driver</string>
-    <string name="add_button_label">add date</string>
+    <string name="date_add_button">add date</string>
     <string name="send_button_label">send date</string>
     <string name="date">date</string>
-    <string name="number">number</string>
+    <string name="waybill_number">number</string>
     <string name="km_before">km before</string>
     <string name="km_after">km after</string>
     <string name="km_day">km day</string>
     <string name="fuel_before">fuel before</string>
     <string name="fuel_after">fuel after</string>
     <string name="fuel_add">fuel add</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="add_journal_item">add item</string>
+    <string name="title_activity_journal">JournalActivity</string>
+    <string name="fuel_consumption">fuel consumption</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="unit_journal">car journal</string>
 </resources>

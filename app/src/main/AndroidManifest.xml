@@ -16,6 +16,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AddJournalItemActivity" />
+        <activity
+            android:name=".JournalActivity"
+            android:label="@string/title_activity_journal"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/MyTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ua.pp.myprojects.zsudriver.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

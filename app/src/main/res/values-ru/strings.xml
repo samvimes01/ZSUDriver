@@ -1,13 +1,17 @@
 <resources>
     <string name="app_name">ZSU Driver</string>
-    <string name="add_button_label">выбор даты</string>
+    <string name="date_add_button">выбор даты</string>
     <string name="send_button_label">добавить</string>
     <string name="date">дата</string>
-    <string name="number">номер</string>
+    <string name="waybill_number">номер</string>
     <string name="km_before">км перед</string>
     <string name="km_after">км после</string>
     <string name="km_day">пробег</string>
     <string name="fuel_before">топливо до</string>
     <string name="fuel_after">топливо после</string>
     <string name="fuel_add">топливо получено</string>
+    <string name="sign_out">Выход</string>
+    <string name="add_journal_item">добавить запись</string>
+    <string name="fuel_consumption">расход топлива</string>
+    <string name="unit_journal">car journal</string>
 </resources>

@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion compileSdk
+    buildToolsVersion buildTools
     defaultConfig {
         applicationId "ua.pp.myprojects.zsudriver"
-        minSdkVersion 19
-        targetSdkVersion 25
+        minSdkVersion minSdk
+        targetSdkVersion targetSdk
         versionCode 1
         versionName "1.0"
+        resConfigs "auto"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -17,19 +18,34 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
+
+    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
+    compile "com.android.support:design:$supportLibraryVersion"
+    compile "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
+    // Firebase
+    compile "com.google.firebase:firebase-database:$firebaseVersion"
+    compile "com.google.firebase:firebase-storage:$firebaseVersion"
+    compile "com.google.firebase:firebase-auth:$firebaseVersion"
+    compile "com.google.android.gms:play-services-auth:$firebaseVersion"
+    // Single target that includes all FirebaseUI libraries above
+    compile "com.firebaseui:firebase-ui:$firebaseUiVersion"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.google.firebase:firebase-database:10.0.1'
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:design:25.3.1'
 }
+
+
+
+
 
 
 apply plugin: 'com.google.gms.google-services'
