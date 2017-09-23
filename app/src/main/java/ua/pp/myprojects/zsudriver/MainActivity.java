@@ -26,6 +26,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +38,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Arrays;
 
+import static ua.pp.myprojects.zsudriver.R.id.userId;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
@@ -44,12 +48,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final String ANONYMOUS = "anonymous";
     public static final int RC_SIGN_IN = 1;
-    private static final int RC_PHOTO_PICKER = 2;
 
 
     private ProgressBar mProgressBar;
     private Button mJournalButton;
     private String mUsername;
+    private TextView mUsernameView;
+    private TextView mUserIdView;
 
     // Firebase instance variables
     private FirebaseDatabase mFirebaseDatabase;
@@ -73,6 +78,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Initialize references to views
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mJournalButton = (Button) findViewById(R.id.btnJournal);
+        mUserIdView = (TextView) findViewById(R.id.userName);
+        mUsernameView = (TextView) findViewById(userId);
 
         // Initialize progress bar
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
@@ -85,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    onSignedInInitialize(user.getDisplayName());
+                    onSignedInInitialize(user.getDisplayName(), user.getUid());
                 } else {
                     // User is signed out
                     onSignedOutCleanup();
@@ -140,12 +147,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void onSignedInInitialize(String username) {
+    private void onSignedInInitialize(String username, String userId) {
         mUsername = username;
+        mUsernameView.setText(username);
+        mUserIdView.setText(userId);
+        Toast toast = Toast.makeText(this, "Hello " + username, Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     private void onSignedOutCleanup() {
         mUsername = ANONYMOUS;
+        mUsernameView.setText("");
+        mUserIdView.setText("");
     }
 
 

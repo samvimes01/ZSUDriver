@@ -266,7 +266,7 @@ public class AddJournalItemActivity extends AppCompatActivity implements View.On
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
             // Do something with the date chosen by the user
-            mDatePeeker.setText(day + "." + month + "." + year);
+            mDatePeeker.setText(day + "." + month+1 + "." + year);
         }
     }
 }
