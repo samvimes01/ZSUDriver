@@ -10,7 +10,7 @@
 
 
     <TextView
-        android:id="@+id/dateViewLb"
+        android:id="@+id/accumDateLb"
         android:layout_width="67dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -21,51 +21,51 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/numberViewLb"
+        android:id="@+id/engNmbLb"
         android:layout_width="67dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="4dp"
         android:text="@string/waybill_number"
         android:textAlignment="center"
-        app:layout_constraintLeft_toRightOf="@+id/dateViewLb"
+        app:layout_constraintLeft_toRightOf="@+id/accumDateLb"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/kmBeforeViewLb"
+        android:id="@+id/carcasNmbViewLb"
         android:layout_width="67dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="4dp"
         android:text="@string/km_before"
         android:textAlignment="center"
-        app:layout_constraintLeft_toRightOf="@+id/numberViewLb"
+        app:layout_constraintLeft_toRightOf="@+id/engNmbLb"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/kmAfterViewLb"
+        android:id="@+id/carNameViewLb"
         android:layout_width="67dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="4dp"
         android:text="@string/km_after"
         android:textAlignment="center"
-        app:layout_constraintLeft_toRightOf="@+id/kmBeforeViewLb"
+        app:layout_constraintLeft_toRightOf="@+id/carcasNmbViewLb"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/kmDayViewLb"
+        android:id="@+id/carTypeViewLb"
         android:layout_width="67dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="4dp"
         android:text="@string/km_day"
         android:textAlignment="center"
-        app:layout_constraintLeft_toRightOf="@+id/kmAfterViewLb"
+        app:layout_constraintLeft_toRightOf="@+id/carNameViewLb"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/dateView"
+        android:id="@+id/accumDate"
         android:layout_width="72dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -73,98 +73,98 @@
         android:text=""
         android:textAlignment="center"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateViewLb" />
+        app:layout_constraintTop_toBottomOf="@+id/accumDateLb" />
 
     <TextView
-        android:id="@+id/numberView"
+        android:id="@+id/engNmbView"
         android:layout_width="67dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="6dp"
         android:layout_marginTop="8dp"
         android:text=""
         android:textAlignment="center"
-        app:layout_constraintLeft_toRightOf="@+id/dateView"
-        app:layout_constraintTop_toBottomOf="@+id/numberViewLb" />
+        app:layout_constraintLeft_toRightOf="@+id/accumDate"
+        app:layout_constraintTop_toBottomOf="@+id/engNmbLb" />
 
     <TextView
-        android:id="@+id/kmAfterView"
+        android:id="@+id/carNameView"
         android:layout_width="67dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="6dp"
         android:layout_marginTop="8dp"
         android:textAlignment="center"
-        app:layout_constraintLeft_toRightOf="@+id/kmBeforeView"
-        app:layout_constraintTop_toBottomOf="@+id/kmAfterViewLb" />
+        app:layout_constraintLeft_toRightOf="@+id/carcasNmbView"
+        app:layout_constraintTop_toBottomOf="@+id/carNameViewLb" />
 
     <TextView
-        android:id="@+id/kmBeforeView"
+        android:id="@+id/carcasNmbView"
         android:layout_width="67dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="6dp"
         android:layout_marginTop="8dp"
         android:textAlignment="center"
-        app:layout_constraintLeft_toRightOf="@+id/numberView"
-        app:layout_constraintTop_toBottomOf="@+id/kmBeforeViewLb" />
+        app:layout_constraintLeft_toRightOf="@+id/engNmbView"
+        app:layout_constraintTop_toBottomOf="@+id/carcasNmbViewLb" />
 
     <TextView
-        android:id="@+id/kmDayView"
+        android:id="@+id/carTypeView"
         android:layout_width="67dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="6dp"
         android:layout_marginTop="8dp"
         android:textAlignment="center"
-        app:layout_constraintLeft_toRightOf="@+id/kmAfterView"
-        app:layout_constraintTop_toBottomOf="@+id/kmDayViewLb" />
+        app:layout_constraintLeft_toRightOf="@+id/carNameView"
+        app:layout_constraintTop_toBottomOf="@+id/carTypeViewLb" />
 
     <TextView
-        android:id="@+id/fuelBeforeLbl"
+        android:id="@+id/tyresDateLbl"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="@string/fuel_before"
         android:textAlignment="center"
         android:layout_marginTop="7dp"
-        app:layout_constraintTop_toBottomOf="@+id/dateView"
+        app:layout_constraintTop_toBottomOf="@+id/accumDate"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
-        android:id="@+id/fuelBeforeView"
+        android:id="@+id/tyresDateView"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/fuelBeforeLbl"
+        app:layout_constraintTop_toBottomOf="@+id/tyresDateLbl"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
-        android:id="@+id/fuelAddLbl"
+        android:id="@+id/tyresNmbsLbl"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="@string/fuel_add"
         android:textAlignment="center"
         android:layout_marginTop="6dp"
-        app:layout_constraintTop_toBottomOf="@+id/kmBeforeView"
-        app:layout_constraintLeft_toRightOf="@+id/fuelBeforeLbl"
+        app:layout_constraintTop_toBottomOf="@+id/carcasNmbView"
+        app:layout_constraintLeft_toRightOf="@+id/tyresDateLbl"
         android:layout_marginLeft="32dp" />
 
     <TextView
-        android:id="@+id/fuelAddView"
+        android:id="@+id/tyresNmbsView"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/fuelAddLbl"
-        app:layout_constraintLeft_toRightOf="@+id/fuelBeforeView"
+        app:layout_constraintTop_toBottomOf="@+id/tyresNmbsLbl"
+        app:layout_constraintLeft_toRightOf="@+id/tyresDateView"
         android:layout_marginLeft="32dp" />
 
     <TextView
-        android:id="@+id/fuelAfterLbl"
+        android:id="@+id/vnLbl"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="@string/fuel_after"
         android:textAlignment="center"
         android:layout_marginTop="6dp"
-        app:layout_constraintTop_toBottomOf="@+id/kmDayView"
-        app:layout_constraintLeft_toRightOf="@+id/fuelAddLbl"
+        app:layout_constraintTop_toBottomOf="@+id/carTypeView"
+        app:layout_constraintLeft_toRightOf="@+id/tyresNmbsLbl"
         android:layout_marginLeft="32dp" />
 
     <TextView
@@ -173,7 +173,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintLeft_toRightOf="@+id/fuelAddView"
-        app:layout_constraintTop_toBottomOf="@+id/fuelAfterLbl" />
+        app:layout_constraintLeft_toRightOf="@+id/tyresNmbsView"
+        app:layout_constraintTop_toBottomOf="@+id/vnLbl" />
 
 </android.support.constraint.ConstraintLayout>

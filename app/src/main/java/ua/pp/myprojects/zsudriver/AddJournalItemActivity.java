@@ -1,18 +1,9 @@
 /*
-*    Copyright (C) 2017 Oleksandr Korneiko
-*
-*   Licensed under the Apache License, Version 2.0 (the "License");
-*   you may not use this file except in compliance with the License.
-*   You may obtain a copy of the License at
-*
-*       http://www.apache.org/licenses/LICENSE-2.0
-*
-*   Unless required by applicable law or agreed to in writing, software
-*   distributed under the License is distributed on an "AS IS" BASIS,
-*   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*   See the License for the specific language governing permissions and
-*   limitations under the License.
-*/
+ * Copyright (c) 2017. Oleksandr Korneiko
+ * This file is subject to the terms and conditions defined in
+ * file "LICENSE", which is part of this source code package
+ *
+ */
 
 package ua.pp.myprojects.zsudriver;
 
@@ -48,8 +39,6 @@ import java.util.Calendar;
 
 public class AddJournalItemActivity extends AppCompatActivity implements View.OnClickListener {
 
-    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-
     private static final String TAG = "MainActivity";
 
     public static final String ANONYMOUS = "anonymous";
@@ -72,14 +61,16 @@ public class AddJournalItemActivity extends AppCompatActivity implements View.On
     private Button mSendButton;
     static EditText mDatePeeker;
 
-    private String mUsername;
+    private String car;
 
     // Firebase instance variables
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mMessagesDatabaseReference;
+    private DatabaseReference mJournalDatabaseReference;
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+
+    private static FirebaseChild mFbsNode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,13 +78,23 @@ public class AddJournalItemActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_add_journal_item);
 
 
-        mUsername = ANONYMOUS;
-
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
+        mFbsNode = FirebaseChild.getInstance();
 
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("milUnit").child("А4104").child("subUnits").child("medUnit").child("journal");
+
+        Intent intent = getIntent();
+
+        car = intent.getStringExtra("car");
+
+
+        String milUnit = User.getMilUnitAccess().toString();
+        String subUnit = User.getSubUnitAccess().toString();
+
+        mJournalDatabaseReference = mFbsNode.getNodeReference(mFbsNode.getNodeReference(mFbsNode.MIL_UNIT, milUnit).child("subUnits"), subUnit).child("journal").child(car);
+
+//        mJournalDatabaseReference = mFirebaseDatabase.getReference().child("milUnit").child("А4104").child("subUnits").child("medUnit").child("journal");
 
 
         // Initialize references to views
@@ -109,7 +110,7 @@ public class AddJournalItemActivity extends AppCompatActivity implements View.On
         mFuelAfterEditText = (EditText) findViewById(R.id.input_fuel_after);
 
         mFuelConsumption = (TextView) findViewById(R.id.dayFuel);
-        mKmDay = (TextView) findViewById(R.id.kmDayView);
+        mKmDay = (TextView) findViewById(R.id.carTypeView);
 
         // DatePicker listener
         mDatePeeker.setOnClickListener(this);
@@ -218,11 +219,9 @@ public class AddJournalItemActivity extends AppCompatActivity implements View.On
     }
 
     private void onSignedInInitialize(String username) {
-        mUsername = username;
     }
 
     private void onSignedOutCleanup() {
-        mUsername = ANONYMOUS;
         mJournalAdapter.clear();
     }
 
@@ -234,7 +233,7 @@ public class AddJournalItemActivity extends AppCompatActivity implements View.On
         switch (view.getId()) {
             case R.id.sendButton:
                 JournalItem journalItem = new JournalItem(mDateEditText.getText().toString(), Integer.parseInt(mNumberEditText.getText().toString()), Integer.parseInt(mKmBeforeEditText.getText().toString()), Integer.parseInt(mKmAfterEditText.getText().toString()), Integer.parseInt(mFuelBeforeEditText.getText().toString()), Integer.parseInt(mFuelAddEditText.getText().toString()), Integer.parseInt(mFuelAfterEditText.getText().toString()));
-                mMessagesDatabaseReference.push().setValue(journalItem);
+                mJournalDatabaseReference.push().setValue(journalItem);
                 finish();
                 break;
             case R.id.trip_date:

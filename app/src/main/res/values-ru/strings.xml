@@ -14,4 +14,14 @@
     <string name="add_journal_item">добавить запись</string>
     <string name="fuel_consumption">расход топлива</string>
     <string name="unit_journal">car journal</string>
+    <string name="accumDateLb">accum date</string>
+    <string name="engNmbLb">engNmb</string>
+    <string name="carcasNmbViewLb">carcasNmb</string>
+    <string name="carName">carName</string>
+    <string name="carType">carType</string>
+    <string name="tyresDate">tyresDate</string>
+    <string name="tyresNmbs">tyresNmbs</string>
+    <string name="carVn">carVn</string>
+    <string name="editCar">edit car</string>
+    <string name="carJournal">journal</string>
 </resources>

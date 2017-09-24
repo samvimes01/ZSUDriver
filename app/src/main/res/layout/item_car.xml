@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginStart="@dimen/activity_horizontal_margin"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/accumDateLb"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:text="@string/accumDateLb"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toRightOf="@+id/carcasNmbViewLb"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/vnView" />
+
+    <TextView
+        android:id="@+id/engNmbLb"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="@string/engNmbLb"
+        android:textAlignment="center"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/carTypeView"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:id="@+id/carcasNmbViewLb"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="54dp"
+        android:text="@string/carcasNmbViewLb"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toRightOf="@+id/engNmbLb"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/carNameView" />
+
+    <TextView
+        android:id="@+id/carNameViewLb"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="54dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/carName"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toRightOf="@+id/carTypeViewLb"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/carTypeViewLb"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/carType"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/accumDate"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
+        android:text=""
+        android:textAlignment="center"
+        app:layout_constraintLeft_toRightOf="@+id/carcasNmbView"
+        app:layout_constraintTop_toBottomOf="@+id/accumDateLb"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/engNmbView"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text=""
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/engNmbLb"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:id="@+id/carNameView"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="54dp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toRightOf="@+id/carTypeView"
+        app:layout_constraintTop_toBottomOf="@+id/carNameViewLb" />
+
+    <TextView
+        android:id="@+id/carcasNmbView"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="54dp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toRightOf="@+id/engNmbView"
+        app:layout_constraintTop_toBottomOf="@+id/carcasNmbViewLb" />
+
+    <TextView
+        android:id="@+id/carTypeView"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carTypeViewLb" />
+
+    <TextView
+        android:id="@+id/tyresDateLbl"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="@string/tyresDate"
+        android:textAlignment="center"
+        android:layout_marginLeft="70dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/engNmbView" />
+
+    <TextView
+        android:id="@+id/tyresDateView"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/tyresDateLbl"
+        tools:layout_editor_absoluteX="70dp" />
+
+    <TextView
+        android:id="@+id/tyresNmbsLbl"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="@string/tyresNmbs"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toRightOf="@+id/tyresDateLbl"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/accumDate" />
+
+    <TextView
+        android:id="@+id/tyresNmbsView"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/tyresNmbsLbl"
+        app:layout_constraintLeft_toRightOf="@+id/tyresDateView"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/vnLbl"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="@string/carVn"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toRightOf="@+id/carNameViewLb"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/vnView"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/vnLbl"
+        app:layout_constraintLeft_toRightOf="@+id/carNameView"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/btnEditCar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="62dp"
+        android:layout_marginTop="22dp"
+        android:text="@string/editCar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:focusable="false"
+        app:layout_constraintTop_toBottomOf="@+id/tyresDateView" />
+
+    <Button
+        android:id="@+id/btnCarJournal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/carJournal"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintLeft_toRightOf="@+id/btnEditCar"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="26dp"
+        android:focusable="false"
+        app:layout_constraintTop_toBottomOf="@+id/tyresNmbsView" />
+
+</android.support.constraint.ConstraintLayout>

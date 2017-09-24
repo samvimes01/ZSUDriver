@@ -1,18 +1,9 @@
 /*
-*    Copyright (C) 2017 Oleksandr Korneiko
-*
-*   Licensed under the Apache License, Version 2.0 (the "License");
-*   you may not use this file except in compliance with the License.
-*   You may obtain a copy of the License at
-*
-*       http://www.apache.org/licenses/LICENSE-2.0
-*
-*   Unless required by applicable law or agreed to in writing, software
-*   distributed under the License is distributed on an "AS IS" BASIS,
-*   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*   See the License for the specific language governing permissions and
-*   limitations under the License.
-*/
+ * Copyright (c) 2017. Oleksandr Korneiko
+ * This file is subject to the terms and conditions defined in
+ * file "LICENSE", which is part of this source code package
+ *
+ */
 
 package ua.pp.myprojects.zsudriver;
 
@@ -27,7 +18,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,23 +28,30 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Arrays;
 
+import static ua.pp.myprojects.zsudriver.R.id.milUnit;
+import static ua.pp.myprojects.zsudriver.R.id.role;
+import static ua.pp.myprojects.zsudriver.R.id.subUnit;
 import static ua.pp.myprojects.zsudriver.R.id.userId;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
 
     private static final String TAG = "MainActivity";
 
     public static final String ANONYMOUS = "anonymous";
     public static final int RC_SIGN_IN = 1;
 
+    private User mUser;
+
 
     private ProgressBar mProgressBar;
     private Button mJournalButton;
-    private String mUsername;
-    private TextView mUsernameView;
-    private TextView mUserIdView;
+    private static String mUsername;
+    private static TextView mUsernameView;
+    private static TextView mUserIdView;
+    private static TextView mUserUnitView;
+    private static TextView mUserSubUnitView;
+    private static TextView mUserRoleView;
 
     // Firebase instance variables
     private FirebaseDatabase mFirebaseDatabase;
@@ -62,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+
+    private static FirebaseChild mFbsNode;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
+        mFbsNode = FirebaseChild.getInstance();
 
 
         // Initialize references to views
@@ -80,19 +81,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mJournalButton = (Button) findViewById(R.id.btnJournal);
         mUserIdView = (TextView) findViewById(R.id.userName);
         mUsernameView = (TextView) findViewById(userId);
+        mUserUnitView = (TextView) findViewById(milUnit);
+        mUserSubUnitView = (TextView) findViewById(subUnit);
+        mUserRoleView = (TextView) findViewById(role);
 
         // Initialize progress bar
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+        mJournalButton.setVisibility(View.INVISIBLE);
+
 
         mJournalButton.setOnClickListener(this);
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
+                FirebaseUser fbsUser = firebaseAuth.getCurrentUser();
+                if (fbsUser != null) {
                     // User is signed in
-                    onSignedInInitialize(user.getDisplayName(), user.getUid());
+                    mUser = User.getInstance(fbsUser.getDisplayName(), fbsUser.getUid());
+                    mFbsNode.getSnapshotMap(mFbsNode.getNodeReference(mFbsNode.USERS, mUser.getUserId()), mUser);
+                    findViewById(R.id.mainConstrLt).setVisibility(View.VISIBLE);
+                    mJournalButton.setVisibility(View.VISIBLE);
+
+//                    onSignedInInitialize(mUser);
                 } else {
                     // User is signed out
                     onSignedOutCleanup();
@@ -147,18 +158,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void onSignedInInitialize(String username, String userId) {
-        mUsername = username;
-        mUsernameView.setText(username);
-        mUserIdView.setText(userId);
-        Toast toast = Toast.makeText(this, "Hello " + username, Toast.LENGTH_SHORT);
-        toast.show();
+    public static void onSignedInInitialize(User user) {
+        mUsername = user.getDisplayName();
+        mUsernameView.setText(mUsername);
+        mUserIdView.setText(user.getUserId());
+        mUserUnitView.setText(user.getMilUnitAccess());
+        mUserSubUnitView.setText(user.getSubUnitAccess());
+        mUserRoleView.setText(user.getRole());
     }
 
     private void onSignedOutCleanup() {
         mUsername = ANONYMOUS;
-        mUsernameView.setText("");
-        mUserIdView.setText("");
+        findViewById(R.id.mainConstrLt).setVisibility(View.INVISIBLE);
     }
 
 
@@ -169,9 +180,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch(view.getId()) {
             case R.id.btnJournal:
-                intent = new Intent(this, JournalActivity.class);
+                intent = new Intent(this, SubUnitCarsActivity.class);
+                intent.putExtra("milUnit", mUser.getMilUnitAccess().toString());
+                intent.putExtra("subUnit", mUser.getSubUnitAccess().toString());
                 startActivity(intent);
                 break;
         }
     }
+
+
 }

@@ -10,15 +10,16 @@ package ua.pp.myprojects.zsudriver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,26 +33,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class JournalActivity extends AppCompatActivity implements View.OnClickListener {
+public class SubUnitCarsActivity extends AppCompatActivity implements View.OnClickListener{
 
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
 
-    private static final String TAG = "MainActivity";
-
-    public static final String ANONYMOUS = "anonymous";
-
+    private static final String TAG = "SubUnitCarActivity";
 
     private ListView mMessageListView;
-    private JournalAdapter mJournalAdapter;
+    private CarAdapter mCarAdapter;
     private ProgressBar mProgressBar;
-    private FloatingActionButton mAddJItemButton;
-
-    private String car;
 
     // Firebase instance variables
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mMessagesDatabaseReference;
+    private DatabaseReference mCarsDatabaseReference1;
+    private DatabaseReference mCarsDatabaseReference;
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -61,10 +56,10 @@ public class JournalActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_journal);
+        setContentView(R.layout.activity_sub_unit_cars);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(this);
 
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -73,37 +68,46 @@ public class JournalActivity extends AppCompatActivity implements View.OnClickLi
 
         Intent intent = getIntent();
 
-        car = intent.getStringExtra("car");
+        String milUnit = intent.getStringExtra("milUnit");
+        String subUnit = intent.getStringExtra("subUnit");
+
+        mCarsDatabaseReference = mFbsNode.getNodeReference(mFbsNode.getNodeReference(mFbsNode.MIL_UNIT, milUnit).child("subUnits"), subUnit).child("vehicles");
+//        mCarsDatabaseReference = mFirebaseDatabase.getReference().child("milUnit").child("A4104").child("subUnits").child("medUnit").child("vehicles");
 
 
-        String milUnit = User.getMilUnitAccess().toString();
-        String subUnit = User.getSubUnitAccess().toString();
-
-        mMessagesDatabaseReference = mFbsNode.getNodeReference(mFbsNode.getNodeReference(mFbsNode.MIL_UNIT, milUnit).child("subUnits"), subUnit).child("journal").child(car);
-
-
-//        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("milUnit").child("А4104").child("subUnits").child("medUnit").child("journal");
         attachDatabaseReadListener();
 
         // Initialize references to views
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar2);
-        mMessageListView = (ListView) findViewById(R.id.lstV_month);
-
-        mAddJItemButton = (FloatingActionButton) findViewById(R.id.fab);
-
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar3);
+        mMessageListView = (ListView) findViewById(R.id.lstV_cars);
 
         // Initialize message ListView and its adapter
-        List<JournalItem> journalItems = new ArrayList<>();
-        mJournalAdapter = new JournalAdapter(this, R.layout.item_message, journalItems);
-        mMessageListView.setAdapter(mJournalAdapter);
+        List<CarItem> carItems = new ArrayList<>();
+        mCarAdapter = new CarAdapter(this, R.layout.item_car, carItems);
+        mMessageListView.setAdapter(mCarAdapter);
+
+        mMessageListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                CarItem itemRef = mCarAdapter.getItem(position);
+
+                Toast toast = Toast.makeText(SubUnitCarsActivity.this, itemRef.getVn(), Toast.LENGTH_SHORT);
+                toast.show();
+
+                Intent intent;
+
+                intent = new Intent(SubUnitCarsActivity.this, JournalActivity.class);
+                intent.putExtra("car", itemRef.getCarId().toString());
+                intent.putExtra("car", itemRef.getCarId().toString());
+                startActivity(intent);
+
+            }
+        });
+
 
         // Initialize progress bar
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
 
-        mAddJItemButton.setOnClickListener(this);
-
-
-//check for authorization
+        // Check for authorization
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -137,7 +141,7 @@ public class JournalActivity extends AppCompatActivity implements View.OnClickLi
         if (mAuthStateListener != null) {
             mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
         }
-        mJournalAdapter.clear();
+        mCarAdapter.clear();
         detachDatabaseReadListener();
     }
 
@@ -164,7 +168,7 @@ public class JournalActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void onSignedOutCleanup() {
-        mJournalAdapter.clear();
+        mCarAdapter.clear();
         detachDatabaseReadListener();
         finish();
     }
@@ -174,23 +178,46 @@ public class JournalActivity extends AppCompatActivity implements View.OnClickLi
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    JournalItem journalItem = dataSnapshot.getValue(JournalItem.class);
-                    mJournalAdapter.add(journalItem);
+                    CarItem carItem = dataSnapshot.getValue(CarItem.class);
+                    mCarAdapter.add(carItem);
                 }
 
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
-                public void onChildRemoved(DataSnapshot dataSnapshot) {}
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
-                public void onCancelled(DatabaseError databaseError) {}
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                }
+
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+                }
+
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                }
+
+                public void onCancelled(DatabaseError databaseError) {
+                }
             };
-            mMessagesDatabaseReference.addChildEventListener(mChildEventListener);
+            mCarsDatabaseReference.addChildEventListener(mChildEventListener);
+
+//            mFbsNode.getDataSnapshot(mCarsDatabaseReference, new SnapshotRetrieveListener() {
+//                @Override
+//                public void retrieveDataSnapshot(DataSnapshot dataSnapshot) {
+//                    CarItem carItem = dataSnapshot.getValue(CarItem.class);
+//                    mCarAdapter.add(carItem);
+//                }
+//
+//                @Override
+//                public void retrieveFbsNodeData(Map<String, Object> fbsNodeData) {
+//                }
+//
+//                @Override
+//                public void onFailed(DatabaseError databaseError) {
+//                }
+//            });
         }
     }
 
 
     private void detachDatabaseReadListener() {
         if (mChildEventListener != null) {
-            mMessagesDatabaseReference.removeEventListener(mChildEventListener);
+            mCarsDatabaseReference.removeEventListener(mChildEventListener);
             mChildEventListener = null;
         }
     }
@@ -198,13 +225,18 @@ public class JournalActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         Intent intent;
+        Log.d("My view", String.valueOf(view.getId()));
 
-        switch(view.getId()) {
-            case R.id.fab:
-                intent = new Intent(this, AddJournalItemActivity.class);
-                intent.putExtra("car", car);
-                startActivity(intent);
+        switch (view.getId()) {
+            case R.id.btnCarJournal:
+//                intent = new Intent(this, JournalActivity.class);
+//                intent.putExtra("car", "car1".toString());
+//                startActivity(intent);
+                String text = "hi";
+                Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
+                toast.show();
                 break;
         }
     }
+
 }
