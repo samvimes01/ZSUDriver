@@ -7,17 +7,13 @@
 
 package ua.pp.myprojects.zsudriver;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-
 import java.util.Map;
 
-class User implements SnapshotRetrieveListener {
+class User implements FirebaseSnapshotMapSetter{
     private static final User ourInstance = new User();
-    private static String displayName = "";
-    private static String userId = "";
+    private static String displayName;
+    private static String userId;
 
-    private static Map<String, Object> fbsUserData;
     private static String milUnitAccess;
     private static String subUnitAccess;
     private static String role;
@@ -65,25 +61,10 @@ class User implements SnapshotRetrieveListener {
     }
 
 
-    @Override
-    public void retrieveDataSnapshot(DataSnapshot dataSnapshot) {
-
-    }
-
-    @Override
-    public void retrieveFbsNodeData(Map<String, Object> fbsNodeData) {
-        User.fbsUserData = fbsNodeData;
+    public void setFbsSnapshotData(Map<String, Object> fbsUserData) {
         setMilUnitAccess((String) fbsUserData.get("milUnit"));
         setSubUnitAccess((String) fbsUserData.get("subUnit"));
         setRole((String) fbsUserData.get("role"));
-// is called in MainActivity
-        MainActivity.onSignedInInitialize(ourInstance);
-    }
-
-
-    @Override
-    public void onFailed(DatabaseError databaseError) {
-
     }
 
 

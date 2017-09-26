@@ -10,7 +10,6 @@ package ua.pp.myprojects.zsudriver;
 
 import android.util.Log;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,18 +27,10 @@ public class FirebaseChild {
     public static final int ROLES = 2;
     public static final int VEHICLES = 3;
     public static final int MIL_UNIT = 4;
-    public static final int LIST_MIL_UNIT = 5;
-    public static final int LIST_SUB_UNIT = 6;
-    public static final int SUB_UNIT = 7;
-
-    private Map<String, Object> childMapValue;
-
 
     // Firebase instance variables
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mNodeDatabaseReference;
-    private FirebaseAuth mFirebaseAuth;
-    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
 
     static FirebaseChild getInstance() {
@@ -49,7 +40,6 @@ public class FirebaseChild {
     private FirebaseChild() {
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mFirebaseAuth = FirebaseAuth.getInstance();
     }
 
     public DatabaseReference getNodeReference(int node, String subNode) {
@@ -76,13 +66,12 @@ public class FirebaseChild {
         return node.child(subNode);
     }
 
-    public void getSnapshotMap(DatabaseReference node, final SnapshotRetrieveListener listener) {
+    public void getDataSnapshot(DatabaseReference node, final SnapshotRetrieveListener listener, final FirebaseSnapshotMapSetter fbsSnapshotMapSetter) {
 
         node.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                childMapValue = (Map<String, Object>) dataSnapshot.getValue();
-                listener.retrieveFbsNodeData(childMapValue);
+                listener.retrieveDataSnapshot(dataSnapshot, fbsSnapshotMapSetter);
             }
 
             @Override
@@ -91,23 +80,9 @@ public class FirebaseChild {
                 Log.d("MyLog", "loadPost:onCancelled", databaseError.toException());
             }
         });
-
     }
 
-    public void getDataSnapshot(DatabaseReference node, final SnapshotRetrieveListener listener) {
-
-        node.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                listener.retrieveDataSnapshot(dataSnapshot);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                listener.onFailed(databaseError);
-                Log.d("MyLog", "loadPost:onCancelled", databaseError.toException());
-            }
-        });
-
+    public Map<String, Object> getSnapshotMap(DataSnapshot dataSnapshot) {
+        return (Map<String, Object>) dataSnapshot.getValue();
     }
 }

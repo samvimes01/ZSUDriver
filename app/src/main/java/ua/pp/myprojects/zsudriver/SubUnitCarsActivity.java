@@ -58,9 +58,6 @@ public class SubUnitCarsActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_unit_cars);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(this);
-
         // Initialize Firebase components
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -72,8 +69,6 @@ public class SubUnitCarsActivity extends AppCompatActivity implements View.OnCli
         String subUnit = intent.getStringExtra("subUnit");
 
         mCarsDatabaseReference = mFbsNode.getNodeReference(mFbsNode.getNodeReference(mFbsNode.MIL_UNIT, milUnit).child("subUnits"), subUnit).child("vehicles");
-//        mCarsDatabaseReference = mFirebaseDatabase.getReference().child("milUnit").child("A4104").child("subUnits").child("medUnit").child("vehicles");
-
 
         attachDatabaseReadListener();
 
