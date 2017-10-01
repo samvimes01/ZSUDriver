@@ -9,24 +9,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddJournalItemActivity" />
+        <activity android:name=".activities.AddJournalItemActivity" />
         <activity
-            android:name=".JournalActivity"
+            android:name=".activities.JournalActivity"
             android:label="@string/title_activity_journal"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:theme="@style/MyTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ua.pp.myprojects.zsudriver.MainActivity" />
+                android:value="ua.pp.myprojects.zsudriver.activities.MainActivity" />
         </activity>
-        <activity android:name=".SubUnitCarsActivity"></activity>
+        <activity android:name=".activities.SubUnitCarsActivity" />
+        <activity android:name=".activities.NewUserActivity" />
+        <activity android:name=".activities.EditJournalItemActivity"></activity>
     </application>
 
 </manifest>

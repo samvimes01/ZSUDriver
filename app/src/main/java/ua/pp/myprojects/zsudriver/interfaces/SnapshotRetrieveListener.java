@@ -5,12 +5,13 @@
  *
  */
 
-package ua.pp.myprojects.zsudriver;
+package ua.pp.myprojects.zsudriver.interfaces;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
 public interface SnapshotRetrieveListener {
-    void retrieveDataSnapshot(DataSnapshot dataSnapshot, FirebaseSnapshotMapSetter fbsSnapshotMapSetter);
+    void retrieveDataSnapshot(DataSnapshot dataSnapshot);
     void onFailed(DatabaseError databaseError);
+    void onDataSnapshotNonExists();
 }

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017. Oleksandr Korneiko
+  ~ This file is subject to the terms and conditions defined in
+  ~ file "LICENSE", which is part of this source code package
+  ~
+  -->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ua.pp.myprojects.zsudriver.activities.NewUserActivity">
+
+    <TextView
+        android:id="@+id/userNameNew"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="userName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userIdNew"
+        android:layout_marginStart="16dp" />
+
+    <TextView
+        android:id="@+id/userIdNew"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="userId"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp" />
+
+
+    <TextView
+        android:id="@+id/milUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="milUnit"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/userNameNew"
+        android:layout_marginStart="16dp" />
+
+    <TextView
+        android:id="@+id/subUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="subUnit"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/milUnit"
+        android:layout_marginStart="16dp" />
+
+    <TextView
+        android:id="@+id/role"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="role"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subUnit"
+        android:layout_marginStart="16dp" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        app:layout_constraintLeft_toRightOf="@+id/milUnit"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/userNameNew" />
+
+</android.support.constraint.ConstraintLayout>

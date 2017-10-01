@@ -5,10 +5,11 @@
  *
  */
 
-package ua.pp.myprojects.zsudriver;
+package ua.pp.myprojects.zsudriver.interfaces;
 
-import java.util.Map;
+/**
+ * Created by Alex on 27.09.2017.
+ */
 
-interface FirebaseSnapshotMapSetter {
-    void setFbsSnapshotData(Map<String, Object> fbsUserData);
+public interface Item {
 }

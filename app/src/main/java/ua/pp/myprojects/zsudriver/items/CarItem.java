@@ -5,11 +5,14 @@
  *
  */
 
-package ua.pp.myprojects.zsudriver;
+package ua.pp.myprojects.zsudriver.items;
 
-public class CarItem {
+import ua.pp.myprojects.zsudriver.interfaces.Item;
+
+public class CarItem implements Item {
 
     //private String name;
+    private String accumType;
     private String accumDate;
     private String carcasNmb;
     private String engNmb;
@@ -24,16 +27,26 @@ public class CarItem {
     public CarItem() {
     }
 
-    public CarItem(String accumDate, String carcasNmb, String engNmb, String id, String name, String type, String tyresDate, String tyresNmbs, String vn, String carId) {
+    public CarItem(String accumType, String accumDate, String carcasNmb, String engNmb, String id, String name, String type, String tyresDate, String tyresNmbs, String vn, String carId) {
+        this.accumType = accumType;
         this.accumDate = accumDate;
         this.carcasNmb = carcasNmb;
         this.engNmb = engNmb;
+
         this.name = name;
         this.type = type;
         this.tyresDate = tyresDate;
         this.tyresNmbs = tyresNmbs;
         this.vn = vn;
         this.vn = carId;
+    }
+
+    public String getAccumType() {
+        return accumType;
+    }
+
+    public void setAccumType(String accumType) {
+        this.accumType = accumType;
     }
 
     public String getAccumDate() {

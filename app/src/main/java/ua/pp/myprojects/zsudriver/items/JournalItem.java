@@ -5,9 +5,11 @@
  *
  */
 
-package ua.pp.myprojects.zsudriver;
+package ua.pp.myprojects.zsudriver.items;
 
-public class JournalItem {
+import ua.pp.myprojects.zsudriver.interfaces.Item;
+
+public class JournalItem implements Item {
 
     private String date;
     private Integer number;
@@ -16,12 +18,12 @@ public class JournalItem {
     private Integer fuelBefore;
     private Integer fuelAdd;
     private Integer fuelAfter;
-
+    private Integer fuelConsumpt;
 
     public JournalItem() {
     }
 
-    public JournalItem(String date, Integer number, Integer kmBefore, Integer kmAfter, Integer fuelBefore, Integer fuelAdd, Integer fuelAfter) {
+    public JournalItem(String date, Integer number, Integer kmBefore, Integer kmAfter, Integer fuelBefore, Integer fuelAdd, Integer fuelAfter, Integer fuelConsumpt) {
         this.date = date;
         this.number = number;
         this.kmBefore = kmBefore;
@@ -29,6 +31,7 @@ public class JournalItem {
         this.fuelBefore = fuelBefore;
         this.fuelAdd = fuelAdd;
         this.fuelAfter = fuelAfter;
+        this.fuelConsumpt = fuelConsumpt;
     }
 
 
@@ -87,4 +90,14 @@ public class JournalItem {
     public void setFuelAfter(Integer fuelAfter) {
         this.fuelAfter = fuelAfter;
     }
+
+
+    public Integer getFuelConsumpt() {
+        return fuelConsumpt;
+    }
+
+    public void setFuelConsumpt(Integer fuelConsumpt) {
+        this.fuelConsumpt = fuelConsumpt;
+    }
+
 }
