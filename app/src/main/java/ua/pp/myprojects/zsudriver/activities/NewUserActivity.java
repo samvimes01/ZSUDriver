@@ -26,10 +26,13 @@ import ua.pp.myprojects.zsudriver.fbdbs.FirebaseChild;
 import ua.pp.myprojects.zsudriver.interfaces.SnapshotRetrieveListener;
 import ua.pp.myprojects.zsudriver.models.User;
 
-public class NewUserActivity extends ActivityBasic implements SnapshotRetrieveListener {
+public class NewUserActivity extends ActivityBasic {
 
     ArrayList<String> data;
-    Map<String, Object> nodeListData;
+
+    RetrieveListener milUnit;
+    RetrieveListener subUnit;
+    RetrieveListener role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,48 +45,30 @@ public class NewUserActivity extends ActivityBasic implements SnapshotRetrieveLi
         TextView userNameNew = findViewById(R.id.userNameNew);
         userNameNew.setText(User.getDisplayName());
 
-//        mFbsNode.getDataSnapshot(mFbsNode.getNodeReference(FirebaseChild.USERS).child(User.getUserId()), NewUserActivity.this);
-        mFbsNode.getDataSnapshot(mFbsNode.getNodeReference(FirebaseChild.MIL_UNIT).child(FirebaseChild.LIST_CHILD), NewUserActivity.this);
 
+        milUnit = new RetrieveListener(mFbsNode, (Spinner) findViewById(R.id.spinnerMilUnit), this, "unit");
+        role = new RetrieveListener(mFbsNode, (Spinner) findViewById(R.id.spinnerRoleUnit), this, "role");
 
-        // Initialize message ListView and its adapter
+        mFbsNode.getDataSnapshot(mFbsNode.getNodeReference(FirebaseChild.MIL_UNIT).child(FirebaseChild.LIST_CHILD), milUnit);
+        mFbsNode.getDataSnapshot(mFbsNode.getNodeReference(FirebaseChild.ROLES), role);
 
     }
+
 
     @Override
     protected void onSignedInInitialize() {
 
     }
 
+    public void onSpinnerDataReady(Map<String, Object> nodeListData, Spinner spinner, final String mode) {
 
-    @Override
-    public void retrieveDataSnapshot(DataSnapshot dataSnapshot) {
-        nodeListData = mFbsNode.getSnapshotMap(dataSnapshot);
-        onSpinnerDataReady(nodeListData);
-    }
-
-    @Override
-    public void onFailed(DatabaseError databaseError) {
-
-    }
-
-    @Override
-    public void onDataSnapshotNonExists() {
-
-    }
-
-    public void onSpinnerDataReady(Map<String, Object> nodeListData) {
-
-        data = new ArrayList<String>(nodeListData.keySet());
-
-//        String[] data = {"one", "two", "three", "four", "five"};
-
+        data = new ArrayList<>(nodeListData.keySet());
 
         // адаптер
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, data);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+//        spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
         // заголовок
         spinner.setPrompt("Title");
@@ -95,10 +80,49 @@ public class NewUserActivity extends ActivityBasic implements SnapshotRetrieveLi
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // показываем позиция нажатого элемента
                 Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
+                switch (mode) {
+                    case "unit":
+                        mFbsNode.writeToDb(mFbsNode.getNodeReference(FirebaseChild.USERS).child(User.getUserId()).child(FirebaseChild.MIL_UNIT_CHILD), parent.getItemAtPosition(position).toString());
+                        break;
+                    case "role":
+                        mFbsNode.writeToDb(mFbsNode.getNodeReference(FirebaseChild.USERS).child(User.getUserId()).child("role"), parent.getItemAtPosition(position).toString());
+                        break;
+                }
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
+    }
+}
+
+class RetrieveListener implements SnapshotRetrieveListener {
+
+    private  FirebaseChild node;
+    private  Spinner spinner;
+    private NewUserActivity act;
+    private String mode;
+
+    RetrieveListener(FirebaseChild node, Spinner spinner, NewUserActivity act, String mode) {
+        this.node = node;
+        this.spinner = spinner;
+        this.act = act;
+        this.mode = mode;
+    }
+
+    @Override
+    public void onRetrieveDataSnapshot(DataSnapshot dataSnapshot) {
+        act.onSpinnerDataReady(node.getSnapshotMap(dataSnapshot), spinner, mode);
+    }
+
+    @Override
+    public void onFailed(DatabaseError databaseError) {
+
+    }
+
+    @Override
+    public void onDataSnapshotNonExists() {
+
     }
 }

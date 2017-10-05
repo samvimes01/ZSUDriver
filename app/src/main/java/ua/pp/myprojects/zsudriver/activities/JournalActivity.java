@@ -56,8 +56,6 @@ public class JournalActivity extends ActivityBasic {
         mTitle.setText(" " + intent.getStringExtra("vn"));
 
         mDbActivityReference = mFbsNode.getNodeReference(FirebaseChild.MIL_UNIT).child(User.getMilUnit())
-                                                                                .child(FirebaseChild.SUB_UNIT_CHILD)
-                                                                                .child(User.getSubUnit())
                                                                                 .child(FirebaseChild.JOURNAL_CHILD)
                                                                                 .child(car);
 

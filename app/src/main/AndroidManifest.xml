@@ -26,7 +26,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ua.pp.myprojects.zsudriver.activities.MainActivity" />
         </activity>
-        <activity android:name=".activities.SubUnitCarsActivity" />
+        <activity android:name=".activities.MilUnitCarsActivity" />
         <activity android:name=".activities.NewUserActivity" />
         <activity android:name=".activities.EditJournalItemActivity"></activity>
     </application>

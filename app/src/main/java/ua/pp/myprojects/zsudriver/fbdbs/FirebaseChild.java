@@ -35,7 +35,6 @@ public class FirebaseChild {
     public static final String ROLES_CHILD = "roles";
     public static final String VEHICLES_CHILD = "vehicles";
     public static final String MIL_UNIT_CHILD = "milUnit";
-    public static final String SUB_UNIT_CHILD = "subUnits";
     public static final String JOURNAL_CHILD = "journal";
     public static final String LIST_CHILD = "list";
 
@@ -82,7 +81,7 @@ public class FirebaseChild {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    listener.retrieveDataSnapshot(dataSnapshot);
+                    listener.onRetrieveDataSnapshot(dataSnapshot);
                 } else {
                     listener.onDataSnapshotNonExists();
                 }
@@ -96,7 +95,8 @@ public class FirebaseChild {
         });
     }
 
-    @SuppressWarnings("unchecked")
+
+        @SuppressWarnings("unchecked")
     public HashMap<String, Object> getSnapshotMap(DataSnapshot dataSnapshot) {
         return (HashMap<String, Object>) dataSnapshot.getValue();
     }
@@ -114,7 +114,7 @@ public class FirebaseChild {
 //            mChildEventListener = new ChildEventListener() {
 //                @Override
 //                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//                    listener.retrieveDataSnapshot(dataSnapshot);
+//                    listener.onRetrieveDataSnapshot(dataSnapshot);
 //                }
 //
 //                public void onChildChanged(DataSnapshot dataSnapshot, String s) {}

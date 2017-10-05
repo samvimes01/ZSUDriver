@@ -26,23 +26,18 @@ import ua.pp.myprojects.zsudriver.fbdbs.FirebaseChild;
 import ua.pp.myprojects.zsudriver.items.CarItem;
 import ua.pp.myprojects.zsudriver.models.User;
 
-public class SubUnitCarsActivity extends ActivityBasic {
+public class MilUnitCarsActivity extends ActivityBasic {
     ListView mMessageListView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sub_unit_cars);
+        setContentView(R.layout.activity_mil_unit_cars);
 
         // Initialize references to views
         ProgressBar mProgressBar = findViewById(R.id.progressBar3);
         mMessageListView = findViewById(R.id.lstV_cars);
 
-        String milUnit = User.getMilUnit();
-        String subUnit = User.getSubUnit();
-
-        mDbActivityReference = mFbsNode.getNodeReference(FirebaseChild.MIL_UNIT).child(milUnit)
-                                                                                .child(FirebaseChild.SUB_UNIT_CHILD)
-                                                                                .child(subUnit)
+        mDbActivityReference = mFbsNode.getNodeReference(FirebaseChild.MIL_UNIT).child(User.getMilUnit())
                                                                                 .child(FirebaseChild.VEHICLES_CHILD);
 
         attachDatabaseReadListener();
@@ -57,12 +52,12 @@ public class SubUnitCarsActivity extends ActivityBasic {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 CarItem itemRef = (CarItem) mAdapter.getItem(position);
 
-                Toast toast = Toast.makeText(SubUnitCarsActivity.this, itemRef.getVn(), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(MilUnitCarsActivity.this, itemRef.getVn(), Toast.LENGTH_SHORT);
                 toast.show();
 
                 Intent intent;
 
-                intent = new Intent(SubUnitCarsActivity.this, JournalActivity.class);
+                intent = new Intent(MilUnitCarsActivity.this, JournalActivity.class);
                 intent.putExtra("car", itemRef.getCarId());
                 intent.putExtra("vn", itemRef.getVn());
                 startActivity(intent);

@@ -11,7 +11,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
 public interface SnapshotRetrieveListener {
-    void retrieveDataSnapshot(DataSnapshot dataSnapshot);
+    void onRetrieveDataSnapshot(DataSnapshot dataSnapshot);
     void onFailed(DatabaseError databaseError);
     void onDataSnapshotNonExists();
 }

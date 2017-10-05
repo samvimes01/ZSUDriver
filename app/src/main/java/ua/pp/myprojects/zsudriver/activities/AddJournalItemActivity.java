@@ -57,8 +57,6 @@ public class AddJournalItemActivity extends ActivityBasic implements DatePickerD
         String car = intent.getStringExtra("car");
 
         mDbActivityReference = mFbsNode.getNodeReference(FirebaseChild.MIL_UNIT).child(User.getMilUnit())
-                                                                                .child(FirebaseChild.SUB_UNIT_CHILD)
-                                                                                .child(User.getSubUnit())
                                                                                 .child(FirebaseChild.JOURNAL_CHILD)
                                                                                 .child(car);
 

@@ -17,7 +17,6 @@ public class User implements FirebaseSnapshotMapSetter {
     private static String userId;
 
     private static String milUnit;
-    private static String subUnit;
     private static String role;
 
     public static User getInstance() {
@@ -52,14 +51,6 @@ public class User implements FirebaseSnapshotMapSetter {
         User.milUnit = milUnit;
     }
 
-    public static String getSubUnit() {
-        return subUnit;
-    }
-
-    private static void setSubUnit(String subUnit) {
-        User.subUnit = subUnit;
-    }
-
     public static String getRole() {
         return role;
     }
@@ -71,7 +62,6 @@ public class User implements FirebaseSnapshotMapSetter {
 
     public void setFbsSnapshotData(Map<String, Object> fbsUserData) {
         setMilUnit((String) fbsUserData.get("milUnit"));
-        setSubUnit((String) fbsUserData.get("subUnit"));
         setRole((String) fbsUserData.get("role"));
     }
 

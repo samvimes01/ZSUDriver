@@ -36,7 +36,6 @@ public class MainActivity extends ActivityBasic implements SnapshotRetrieveListe
     private TextView mUsernameView;
     private TextView mUserIdView;
     private TextView mUserUnitView;
-    private TextView mUserSubUnitView;
     private TextView mUserRoleView;
 
 
@@ -51,7 +50,6 @@ public class MainActivity extends ActivityBasic implements SnapshotRetrieveListe
         mUserIdView =  findViewById(R.id.userName);
         mUsernameView =  findViewById(R.id.userId);
         mUserUnitView =  findViewById(R.id.milUnit);
-        mUserSubUnitView = findViewById(R.id.subUnit);
         mUserRoleView = findViewById(R.id.role);
 
         // View INVISIBLE until data loaded
@@ -91,14 +89,14 @@ public class MainActivity extends ActivityBasic implements SnapshotRetrieveListe
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.btnJournal:
-                intent = new Intent(this, SubUnitCarsActivity.class);
+                intent = new Intent(this, MilUnitCarsActivity.class);
                 startActivity(intent);
                 break;
         }
     }
 
     @Override
-    public void retrieveDataSnapshot(DataSnapshot dataSnapshot) {
+    public void onRetrieveDataSnapshot(DataSnapshot dataSnapshot) {
         User.getInstance().setFbsSnapshotData(mFbsNode.getSnapshotMap(dataSnapshot));
         setUserViews();
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
@@ -123,7 +121,6 @@ public class MainActivity extends ActivityBasic implements SnapshotRetrieveListe
         mUsernameView.setText(User.getDisplayName());
         mUserIdView.setText(User.getUserId());
         mUserUnitView.setText(User.getMilUnit());
-        mUserSubUnitView.setText(User.getSubUnit());
         mUserRoleView.setText(User.getRole());
     }
 
@@ -131,7 +128,6 @@ public class MainActivity extends ActivityBasic implements SnapshotRetrieveListe
         mUsernameView.setVisibility(View.INVISIBLE);
         mUserIdView.setVisibility(View.INVISIBLE);
         mUserUnitView.setVisibility(View.INVISIBLE);
-        mUserSubUnitView.setVisibility(View.INVISIBLE);
         mUserRoleView.setVisibility(View.INVISIBLE);
         mJournalButton.setVisibility(View.INVISIBLE);
     }
@@ -140,7 +136,6 @@ public class MainActivity extends ActivityBasic implements SnapshotRetrieveListe
         mUsernameView.setVisibility(View.VISIBLE);
         mUserIdView.setVisibility(View.VISIBLE);
         mUserUnitView.setVisibility(View.VISIBLE);
-        mUserSubUnitView.setVisibility(View.VISIBLE);
         mUserRoleView.setVisibility(View.VISIBLE);
         mJournalButton.setVisibility(View.VISIBLE);
     }
