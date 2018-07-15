@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "518670157012-ruk9tgb2k2kahb29uc85mjo1e0skvuet.apps.googleusercontent.com",
+          "client_id": "518670157012-9h1ao443bpaaqo42mss0ki51hq9tj9jq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "ua.pp.myprojects.zsudriver",
-            "certificate_hash": "4e9168866eeff22b7344e97b60d1d6cd6c2bfa80"
+            "certificate_hash": "40ffab0eb43f881667a141c150ccbd9f4f8b97af"
           }
         },
         {

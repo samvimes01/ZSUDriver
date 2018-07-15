@@ -19,6 +19,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 import ua.pp.myprojects.zsudriver.R;
@@ -78,9 +79,17 @@ public class MainActivity extends ActivityBasic implements SnapshotRetrieveListe
                         .createSignInIntentBuilder()
                         .setIsSmartLockEnabled(false)
                         .setAvailableProviders(
-                                Collections.singletonList(new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
+                                Collections.singletonList(new AuthUI.IdpConfig.GoogleBuilder().build()))
                         .build(),
                 RC_SIGN_IN);
+
+//        startActivityForResult(
+//                AuthUI.getInstance()
+//                        .createSignInIntentBuilder()
+//                        .setAvailableProviders(Arrays.asList(
+//                                new AuthUI.IdpConfig.GoogleBuilder().build()))
+//                        .build(),
+//                RC_SIGN_IN);
 
         mProgressBar.setVisibility(ProgressBar.VISIBLE);
     }

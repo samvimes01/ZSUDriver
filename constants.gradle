@@ -4,14 +4,19 @@ project.ext {
 //    version = '2.3.0'
 //    pomdesc = 'ZSU Driver'
 
-    compileSdk = 26
-    targetSdk = 26
+    compileSdk = 27
+    targetSdk = 27
     minSdk = 19
 
-    buildTools = '26.0.1' // Remember to also update in .travis.yml
+    buildTools = '27.0.3' // Remember to also update in .travis.yml
 
-    firebaseVersion = '11.4.2'
-    supportLibraryVersion = '26.0.1'
-    constraintLayoutVersion = '1.0.2'
-    firebaseUiVersion = '2.3.0'
+    firebaseVersion = '16.0.1'
+    firestoreVersion = '17.0.3'
+    firebaseDbVersion = '16.0.1'
+    firebaseAuVersion = '16.0.2'
+    firebaseStorVersion = '16.0.1'
+    gmsAuthVersion = '15.0.1'
+    supportLibraryVersion = '27.1.1'
+    constraintLayoutVersion = '1.1.2'
+    firebaseUiVersion = '4.1.0'
 }
